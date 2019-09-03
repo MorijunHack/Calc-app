@@ -44,6 +44,10 @@ class Calc extends Component {
         e.preventDefault();
         let action = addMemo(this.state.about, this.state.description);
         this.props.dispatch(action);
+        this.setState({
+            about: '',
+            description: ''
+        })
     }
 
     reset() {
@@ -67,8 +71,8 @@ class Calc extends Component {
         return (
             <div>
                 <p>TOTAL: {this.props.result}</p>
-                <input type="text" name="about" style={this.style} size="30" value={this.state.about} onChange={this.onChange} />
-                <input type="text" name="description" style={this.style} size="40" value={this.state.description} onChange={this.onChange} />
+                <input type="text" name="about" style={this.style} size="30" value={this.state.about} onChange={this.onChange} required />
+                <input type="text" name="description" style={this.style} size="40" value={this.state.description} onChange={this.onChange} required />
                 <button style={this.style} onClick={this.doAction}>Enter!</button>
                 <button style={this.style} onClick={this.reset}>Reset</button>
                 <hr />
