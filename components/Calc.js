@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addMemo } from '../store'
 
 class Calc extends Component {
     style={
@@ -9,7 +10,8 @@ class Calc extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            input: ''
+            about: '',
+            description: ''
         };
         this.onChange = this.onChange.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
@@ -18,8 +20,17 @@ class Calc extends Component {
     }
 
     onChange(e) {
+        let data = this.state
+        switch (e.target.name){
+            case 'about':
+                data.about = e.target.value;
+                break;
+            case 'description':
+                data.description = e.target.value;
+                break;
+        }
         this.setState({
-            input: e.target.value
+            data
         });
     }
 
@@ -30,15 +41,15 @@ class Calc extends Component {
     }
 
     doAction(e) {
-        this.setState({
-            input: ''
-        });
-        return this.props.dispatch({type: 'ENTER', value: this.state.input});
+        e.preventDefault();
+        let action = addMemo(this.state.about, this.state.description);
+        this.props.dispatch(action);
     }
 
     reset() {
         this.setState({
-            input: ''
+            about: '',
+            description: ''
         });
         return this.props.dispatch({type: 'RESET'});
     }
@@ -48,15 +59,17 @@ class Calc extends Component {
         let n = this.props.data.length;
         for(let i=0; i<n; i++) {
             result.push(<tr key={i}>
-                <th>{this.props.data[i]}</th>
+                <th>{this.props.data[i].about}</th>
+                <td>{this.props.data[i].description}</td>
                 <td>{this.props.number[i]}</td>
             </tr>);
         }
         return (
             <div>
                 <p>TOTAL: {this.props.result}</p>
-                <input type="text" style={this.style} size="40" value={this.state.input} onChange={this.onChange} onKeyPress={this.onKeyPress} />
-                <button style={this.style} onClick={this.doAction}>Enter</button>
+                <input type="text" name="about" style={this.style} size="30" value={this.state.about} onChange={this.onChange} />
+                <input type="text" name="description" style={this.style} size="40" value={this.state.description} onChange={this.onChange} />
+                <button style={this.style} onClick={this.doAction}>Enter!</button>
                 <button style={this.style} onClick={this.reset}>Reset</button>
                 <hr />
                 <table>
