@@ -9,6 +9,11 @@ export default <style>{`
         color: #669;
     }
 
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
     h1 {
         font-size: 22pt;
         font-weight: bold;
@@ -34,20 +39,20 @@ export default <style>{`
 
     th {
         font-size: 14pt,
-        font-weight: plain;
-        text-align: left;
-        padding: 0 20px;
+        font-weight: bold;
+        text-align: center;
+        padding: 5px 20px;
         margin: 0;
-        border-bottom: 1px solid gray;
+        border: 1px solid gray;
     }
 
     td {
         font-size: 14pt;
         font-weight: plain;
         text-align: right;
-        padding: 0 20px;
+        padding: 5px 20px;
         margin: 0;
-        border-bottom: 1px solid gray;
+        border: 1px solid gray;
     }
 
     header h1 {
@@ -87,4 +92,16 @@ export default <style>{`
         bottom: 0;
         left: 0;
     }
+
+    .button {
+        border-radius: 4px;
+        border: none;
+        padding: 0 16px;
+        color: #fff;
+        background: #639;
+    }
+
+    input {margin-left: 15px}
+
+    button {margin-left: 5px}
 `}</style>

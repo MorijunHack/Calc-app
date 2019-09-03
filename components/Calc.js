@@ -7,6 +7,26 @@ class Calc extends Component {
         fontSize: "12pt",
         padding: "5px 10px"
     }
+
+    tableStyle = {
+        float: "left",
+        maxWidth: "70%"
+    }
+
+    reStyle = {
+        float: "left"
+    }
+
+    resultStyle = {
+        minWidth: "30%",
+        marginTop: "70px",
+    }
+
+    contentStyle = {
+        width: "100%",
+        height: "300px"
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -70,16 +90,24 @@ class Calc extends Component {
         }
         return (
             <div>
-                <p>TOTAL: {this.props.result}</p>
-                <input type="text" name="about" style={this.style} size="30" value={this.state.about} onChange={this.onChange} required />
-                <input type="text" name="description" style={this.style} size="40" value={this.state.description} onChange={this.onChange} required />
-                <button style={this.style} onClick={this.doAction}>Enter!</button>
-                <button style={this.style} onClick={this.reset}>Reset</button>
+                <input type="text" name="about" style={this.style} size="30" value={this.state.about} onChange={this.onChange} placeholder="概要（時間も）" required />
+                <input type="text" name="description" style={this.style} size="40" value={this.state.description} onChange={this.onChange} placeholder="詳細" required />
+                <button className="button" style={this.style} onClick={this.doAction}>Enter!</button>
+                <button className="button" style={this.style} onClick={this.reset}>Reset</button>
                 <hr />
-                <table>
-                    <tbody>{result}</tbody>
-                </table>
-                <p>{this.props.message}</p>
+                <div style={this.contentStyle}>
+                    <table style={this.tableStyle}>
+                        <thead><tr>
+                            <th>作業概要</th>
+                            <th>作業詳細</th>
+                            <th>時間</th>
+                        </tr></thead>
+                        <tbody>{result}</tbody>
+                    </table>
+                    <div style={this.reStyle}>
+                        <h1 style={this.resultStyle}>　⇨　TOTAL: {this.props.result} hours</h1>
+                    </div>
+                </div>
             </div>
         )
     }
